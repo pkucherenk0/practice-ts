@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 import { ProductsApiClient } from '../../api/productsClient';
 import { Product } from '../../api/types';
 
-test('returns all products as a list', { tag: '@regression' }, async ({ request }) => {
+test('returns all products as a list', { tag: ['@regression', '@api'] }, async ({ request }) => {
   const client = new ProductsApiClient(request);
   const response = await client.getAllProducts();
 
@@ -19,7 +19,7 @@ const productIds = [1, 2, 3];
 for (const productId of productIds) {
   test(
     `returns product ${productId} with title and price`,
-    { tag: '@regression' },
+    { tag: ['@regression', '@api'] },
     async ({ request }) => {
       const client = new ProductsApiClient(request);
       const response = await client.getProduct(productId);

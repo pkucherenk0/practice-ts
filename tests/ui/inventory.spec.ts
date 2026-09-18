@@ -4,7 +4,7 @@ import { test, expect } from '../../fixtures/fixtures';
 
 test(
   'shows all six inventory item images',
-  { tag: ['@regression', '@smoke'] },
+  { tag: ['@regression', '@smoke', '@ui'] },
   async ({ inventoryPage }) => {
     // Check all 6 inventory item images render, one by one.
     for (let index = 0; index < 6; index++) {
@@ -13,10 +13,14 @@ test(
   },
 );
 
-test('adds and removes items from the cart', { tag: '@regression' }, async ({ inventoryPage }) => {
-  await inventoryPage.addToCart('sauce-labs-backpack');
-  await inventoryPage.addToCart('sauce-labs-bike-light');
-  await expect(inventoryPage.cartBadge()).toHaveText('2');
-  await inventoryPage.removeFromCart('sauce-labs-bike-light');
-  await expect(inventoryPage.cartBadge()).toHaveText('1');
-});
+test(
+  'adds and removes items from the cart',
+  { tag: ['@regression', '@ui'] },
+  async ({ inventoryPage }) => {
+    await inventoryPage.addToCart('sauce-labs-backpack');
+    await inventoryPage.addToCart('sauce-labs-bike-light');
+    await expect(inventoryPage.cartBadge()).toHaveText('2');
+    await inventoryPage.removeFromCart('sauce-labs-bike-light');
+    await expect(inventoryPage.cartBadge()).toHaveText('1');
+  },
+);

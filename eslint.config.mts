@@ -5,7 +5,13 @@ import playwright from 'eslint-plugin-playwright';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default defineConfig([
-  globalIgnores(['node_modules/**', 'playwright-report/**', 'test-results/**']),
+  globalIgnores([
+    'node_modules/**',
+    'playwright-report/**',
+    'test-results/**',
+    'allure-results/**',
+    '/allure-report/**',
+  ]),
   {
     files: ['**/*.ts'],
     extends: [

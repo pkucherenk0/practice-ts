@@ -9,7 +9,7 @@ import { userInfo } from '../../factories/userFactory';
 
 test(
   'completes checkout end to end for two cart items',
-  { tag: '@regression' },
+  { tag: ['@regression', '@ui'] },
   async ({ inventoryPage }) => {
     await test.step('Add items to cart', async () => {
       await inventoryPage.addToCart('sauce-labs-backpack');

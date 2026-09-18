@@ -7,5 +7,9 @@ playwright-report/
 blob-report/
 playwright/.cache/
 
+# Allure raw results + generated report.
+allure-results/
+allure-report/
+
 .DS_Store
 .env

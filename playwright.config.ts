@@ -10,7 +10,7 @@ export default defineConfig({
   ...(process.env.CI ? { workers: 4 } : {}),
   retries: process.env.CI ? 1 : 0,
 
-  reporter: [['html', { open: 'never' }], ['list']],
+  reporter: [['html', { open: 'never' }], ['list'], ['allure-playwright']],
 
   use: {
     // No shared baseURL: saucedemo (UI) and fakestoreapi (API) are two unrelated
