@@ -8,6 +8,7 @@ export default defineConfig({
   // Run test files in parallel across worker processes.
   fullyParallel: true,
   ...(process.env.CI ? { workers: 4 } : {}),
+  retries: process.env.CI ? 1 : 0,
 
   reporter: [['html', { open: 'never' }], ['list']],
 

@@ -2,7 +2,7 @@
   "name": "practice-ts",
   "version": "1.0.0",
   "private": true,
-  "description": "TypeScript port of practice-py — same saucedemo/fakestoreapi tests, Node/Playwright-Test idioms instead of Python/pytest.",
+  "description": "Playwright TypeScript test automation practice framework — saucedemo (UI) and fakestoreapi (API) tests.",
   "type": "commonjs",
   "scripts": {
     "test": "playwright test",
@@ -13,6 +13,7 @@
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
     "report": "playwright show-report",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
