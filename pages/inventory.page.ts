@@ -32,4 +32,24 @@ export class InventoryPage {
   cartBadge(): Locator {
     return this.page.locator('[data-test="shopping-cart-badge"]');
   }
+
+  async openMenu(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Open Menu' }).click();
+  }
+
+  async closeMenu(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Close Menu' }).click();
+  }
+
+  async goToAllItems(): Promise<void> {
+    await this.page.locator('[data-test="inventory-sidebar-link"]').click();
+  }
+
+  async sortByPriceLowToHigh(): Promise<void> {
+    await this.page.locator('[data-test="product-sort-container"]').selectOption('lohi');
+  }
+
+  itemPrice(index: number): Locator {
+    return this.page.locator('[data-test="inventory-item-price"]').nth(index);
+  }
 }
