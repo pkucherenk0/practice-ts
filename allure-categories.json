@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Timeout issues",
+    "matchedStatuses": ["failed", "broken"],
+    "messageRegex": ".*[Tt]imeout.*"
+  },
+  {
+    "name": "Network / API errors",
+    "matchedStatuses": ["failed", "broken"],
+    "messageRegex": ".*(403|404|500|502|503|ECONNREFUSED|ECONNRESET|fetch failed).*"
+  },
+  {
+    "name": "Assertion failures",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*(expect|toBe|toHaveText|toBeVisible|toEqual).*"
+  },
+  {
+    "name": "Test defects (code errors)",
+    "matchedStatuses": ["broken"],
+    "traceRegex": ".*(TypeError|ReferenceError|SyntaxError).*"
+  },
+  {
+    "name": "Ignored tests",
+    "matchedStatuses": ["skipped"]
+  },
+  {
+    "name": "Product defects",
+    "matchedStatuses": ["failed"]
+  }
+]

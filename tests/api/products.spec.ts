@@ -1,6 +1,6 @@
 // The for-loop below generates 3 separate, individually-reportable tests
 // (one per product ID) while the file loads, before the runner starts executing.
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/fixtures';
 import { ProductsApiClient } from '../../api/productsClient';
 import { Product } from '../../api/types';
 

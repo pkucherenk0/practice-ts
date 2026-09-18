@@ -8,7 +8,7 @@ export class InventoryPage {
   }
 
   async open(): Promise<void> {
-    await this.page.goto('https://www.saucedemo.com/inventory.html');
+    await this.page.goto('/inventory.html');
   }
 
   async addToCart(productSlug: string): Promise<void> {
