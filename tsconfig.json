@@ -1,9 +1,6 @@
 {
-  // CAVEMAN NOTE: Python has no build step — the interpreter reads .py files directly.
-  // TS is not "real" JS: it needs a compiler config (this file) so the editor and the
-  // Playwright test-runner (which uses esbuild under the hood) know how to type-check
-  // and transpile .ts -> .js before anything runs. Python's closest cousin to this file
-  // is... nothing. Type hints in Python are optional and never block execution.
+  // Compiler config for type-checking and IDE support — Playwright Test itself
+  // transpiles .ts -> .js at runtime via esbuild, independent of this file.
   "compilerOptions": {
     "target": "ES2021",
     "module": "commonjs",
@@ -13,7 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node10",
+    "moduleResolution": "bundler",
     "types": ["node", "@playwright/test"],
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,

@@ -40,11 +40,21 @@ jobs:
 
       - run: npx playwright install --with-deps
 
-      - run: npm test
+      - run: npx playwright test --grep @ui
+
+      - run: npm run allure:generate
+        if: always()
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
           path: playwright-report/
+          retention-days: 14
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report
+          path: allure-report/
           retention-days: 14

@@ -2,7 +2,7 @@ import { test, expect } from '../../fixtures/fixtures';
 
 test(
   'navigates the menu and sorts inventory by price',
-  { tag: '@regression' },
+  { tag: ['@regression', '@ui'] },
   async ({ inventoryPage }) => {
     await inventoryPage.openMenu();
     await inventoryPage.goToAllItems();

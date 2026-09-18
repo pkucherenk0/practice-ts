@@ -33,10 +33,16 @@ practice-ts/
     ├── ui/
     │   ├── inventory.spec.ts
     │   ├── checkout.spec.ts       # full e2e happy path, steps grouped with test.step()
-    │   └── saucedemo.spec.ts      # legacy: unstructured script, kept as before/after reference
+    │   └── saucedemo.spec.ts      # burger menu navigation + price sort
     └── api/
-        └── products.spec.ts       # for-loop generating one test per product ID
+        └── products.spec.ts       # for-loop generating one test per product ID — tagged @api, see note below
 ```
+
+**Note on API tests in CI:** every test carries a `@ui` or `@api` tag (in addition to
+`@regression`/`@smoke`). CI runs `playwright test --grep @ui` only — `tests/api/products.spec.ts`
+calls the live fakestoreapi.com, which sits behind Cloudflare and bot-challenges CI/datacenter
+IPs (403 + HTML "Just a moment..." page instead of JSON), so API tests are excluded from CI by
+tag rather than skipped inline. Run them locally with `npm run test:api`.
 
 ## Setup
 
@@ -55,8 +61,8 @@ npm run test:headed           # watch the browser work
 npm run test:debug            # step through with the Playwright inspector
 npm run test:smoke            # --grep @smoke
 npm run test:regression       # --grep @regression
-npm run test:api              # API tests only — fast, no browser
-npm run test:ui               # UI tests only
+npm run test:api              # --grep @api — fast, no browser (local only, Cloudflare-blocked in CI)
+npm run test:ui               # --grep @ui — what CI runs
 npm run report                # open the last HTML report
 npx tsc --noEmit              # type-check only, no build output
 npm run lint                  # ESLint (typescript-eslint + Playwright rules)
