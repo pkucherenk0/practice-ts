@@ -1,0 +1,13 @@
+# CAVEMAN NOTE: Python's disposable state lives in .venv/ (one folder). Node's
+# disposable state lives in node_modules/ — same idea (throwaway, machine-specific,
+# rebuildable with one command), different folder name and rebuild command
+# (`npm install` instead of `pip install -r requirements.txt`).
+node_modules/
+
+# Playwright Test run artifacts — Python equivalent: allure-results/, .test_durations
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+.DS_Store
