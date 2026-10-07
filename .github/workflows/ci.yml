@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   lint-and-typecheck:
     runs-on: ubuntu-latest
@@ -45,6 +50,11 @@ jobs:
       - run: npm run allure:generate
         if: always()
 
+      - uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: allure-report/
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -58,3 +68,14 @@ jobs:
           name: allure-report
           path: allure-report/
           retention-days: 14
+
+  deploy-report:
+    needs: test
+    if: ${{ !cancelled() && github.ref == 'refs/heads/main' && (needs.test.result == 'success' || needs.test.result == 'failure') }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

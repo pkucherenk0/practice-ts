@@ -17,7 +17,7 @@ export class LoginPage {
   // Every browser action returns a Promise — await it, or the function moves on
   // before the action finishes.
   async open(): Promise<void> {
-    await this.page.goto('https://www.saucedemo.com/');
+    await this.page.goto('/');
   }
 
   async login(username: string, password: string): Promise<void> {

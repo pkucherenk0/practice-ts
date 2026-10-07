@@ -1,4 +1,5 @@
 import { test, expect } from '../../fixtures/fixtures';
+import { parseCurrency } from '../../utils/currency';
 
 test(
   'navigates the menu and sorts inventory by price',
@@ -11,8 +12,6 @@ test(
     await inventoryPage.sortByPriceLowToHigh();
     const firstPrice = await inventoryPage.itemPrice(0).innerText();
     const secondPrice = await inventoryPage.itemPrice(1).innerText();
-    expect(parseFloat(firstPrice.replace('$', ''))).toBeLessThanOrEqual(
-      parseFloat(secondPrice.replace('$', '')),
-    );
+    expect(parseCurrency(firstPrice)).toBeLessThanOrEqual(parseCurrency(secondPrice));
   },
 );
