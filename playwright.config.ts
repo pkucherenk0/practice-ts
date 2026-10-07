@@ -21,6 +21,7 @@ export default defineConfig({
     baseURL: UI_BASE_URL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
+    launchOptions: { slowMo: Number(process.env.SLOWMO ?? 0) },
   },
 
   projects: [

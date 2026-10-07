@@ -4,10 +4,12 @@
 import { test as base, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { InventoryPage } from '../pages/inventory.page';
+import { ProductDetailPage } from '../pages/productDetail.page';
 
 // Shape of the fixture map: `inventoryPage` resolves to an InventoryPage instance.
 interface Fixtures {
   inventoryPage: InventoryPage;
+  productDetailPage: ProductDetailPage;
 }
 
 export const test = base.extend<Fixtures>({
@@ -17,6 +19,10 @@ export const test = base.extend<Fixtures>({
     const inventoryPage = new InventoryPage(page);
     await inventoryPage.open();
     await use(inventoryPage);
+  },
+  productDetailPage: async ({ page }, use) => {
+    const productDetailPage = new ProductDetailPage(page);
+    await use(productDetailPage);
   },
 });
 
