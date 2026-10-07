@@ -1,6 +1,7 @@
 // Extended `test` object with custom fixtures. Every spec file must explicitly
 // import { test, expect } from here instead of '@playwright/test' directly —
 // no auto-discovery, imports show exactly which fixtures a spec has access to.
+import path from 'node:path';
 import { test as base, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { InventoryPage } from '../pages/inventory.page';
@@ -34,6 +35,15 @@ export const test = base.extend<Fixtures>({
 // eslint-disable-next-line no-empty-pattern
 test.beforeEach(async ({}, testInfo) => {
   await allure.parameter('Browser', testInfo.project.name);
+
+  // Labels below feed the Allure dashboards (Behaviors, Features by stories,
+  // Severity and Layer charts) without per-test boilerplate: folder -> layer/epic,
+  // spec filename -> feature, @smoke tag -> critical severity.
+  const isApi = path.basename(path.dirname(testInfo.file)) === 'api';
+  await allure.layer(isApi ? 'api' : 'ui');
+  await allure.epic(isApi ? 'Fake Store API' : 'Saucedemo UI');
+  await allure.feature(path.basename(testInfo.file, '.spec.ts'));
+  await allure.severity(testInfo.tags.includes('@smoke') ? 'critical' : 'normal');
 });
 
 export { expect };

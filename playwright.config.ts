@@ -1,6 +1,7 @@
 // Playwright Test runner config: browsers, retries, reporters, tracing, one typed file.
+import os from 'node:os';
 import { defineConfig, devices } from '@playwright/test';
-import { UI_BASE_URL } from './config/env';
+import { API_BASE_URL, UI_BASE_URL } from './config/env';
 
 const authFile = 'playwright/.auth/user.json';
 
@@ -13,7 +14,23 @@ export default defineConfig({
   ...(process.env.CI ? { workers: 4 } : {}),
   retries: process.env.CI ? 1 : 0,
 
-  reporter: [['html', { open: 'never' }], ['list'], ['allure-playwright']],
+  reporter: [
+    ['html', { open: 'never' }],
+    ['list'],
+    [
+      'allure-playwright',
+      {
+        // Shown in the Environment widget on the report Overview.
+        environmentInfo: {
+          os_platform: os.platform(),
+          node_version: process.version,
+          ui_base_url: UI_BASE_URL,
+          api_base_url: API_BASE_URL,
+          ci: process.env.CI ? 'true' : 'false',
+        },
+      },
+    ],
+  ],
 
   use: {
     // fakestoreapi.com (API) is a different domain — the API client passes
