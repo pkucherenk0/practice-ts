@@ -1,5 +1,10 @@
 [
   {
+    "name": "Flaky tests",
+    "matchedStatuses": ["passed"],
+    "flaky": true
+  },
+  {
     "name": "Timeout issues",
     "matchedStatuses": ["failed", "broken"],
     "messageRegex": ".*[Tt]imeout.*"

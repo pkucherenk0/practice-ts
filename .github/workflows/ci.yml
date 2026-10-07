@@ -57,6 +57,21 @@ jobs:
             curl -fsSL "$base/$f" -o "allure-report/history/$f" || rm -f "allure-report/history/$f"
           done
 
+      - name: Write Allure executor info
+        if: always()
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: |
+          mkdir -p allure-results
+          jq -n \
+            --arg order "$RUN_NUMBER" \
+            --arg run "$RUN_URL" \
+            --arg report "$REPORT_URL" \
+            '{name: "GitHub Actions", type: "github", reportName: ("Saucedemo tests #" + $order), buildOrder: ($order | tonumber), buildName: ("CI #" + $order), buildUrl: $run, reportUrl: $report}' \
+            > allure-results/executor.json
+
       - run: npm run allure:generate
         if: always()
 
