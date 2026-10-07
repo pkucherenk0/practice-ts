@@ -12,5 +12,8 @@ playwright/.auth/
 allure-results/
 allure-report/
 
+# Playwright MCP browser logs/snapshots from Claude Code sessions.
+.playwright-mcp/
+
 .DS_Store
 .env
