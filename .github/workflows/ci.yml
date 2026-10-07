@@ -47,6 +47,16 @@ jobs:
 
       - run: npx playwright test --grep @ui
 
+      - name: Restore Allure history from last published report
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p allure-report/history
+          base="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/history"
+          for f in history.json history-trend.json duration-trend.json categories-trend.json retry-trend.json; do
+            curl -fsSL "$base/$f" -o "allure-report/history/$f" || rm -f "allure-report/history/$f"
+          done
+
       - run: npm run allure:generate
         if: always()
 
